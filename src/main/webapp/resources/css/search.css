@@ -1,0 +1,253 @@
+	@charset "UTF-8";
+	/* 기본 레이아웃 */
+	* {
+		padding: 0;
+		margin: 0;
+		box-sizing: border-box;
+	}
+	
+	a {
+		text-decoration: none;
+		color: black;
+		font-weight: bold;
+	}
+	
+	#home_btn {	border-bottom: 8px solid #fe4662;  }
+	
+	#home_icon {	color: #fe4662;   }
+
+	.textarea {
+		border: none;
+		margin: 0px;
+		background-color: rgba(255, 250, 250, 0.8);
+		width: 500px;
+		padding: 10px 6px 20px 10px;
+	}
+	.board_container {
+		width: 100%;
+	    margin-top: 30px;
+
+	}@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+
+	/* 폰트 size / spacing */
+	 .re_content_area {
+		letter-spacing: 0.4px;
+		font-size: 14px;
+	}
+	 .board_icon{
+	 	 color: gray;
+	 	 cursor: pointer;
+	  }
+	 
+	
+	/* body */
+	body {	background-color: #fafafa; margin-top:   }
+	
+	/* board main wrap */
+	#mainBoardWrap {
+		width: 560px;
+		border: 2px solid pink;
+		padding: 15px;
+		border-radius: 10px;
+		margin: 30px auto;
+		background-color: rgba(255, 250, 250, 0.8);
+		box-shadow: 10px 10px 20px rgba(30, 30, 30, 0.5);
+	}
+	.mainBoardWrap_img { height: 750px; }
+	
+	.mainBoardWrap_content { height: 350px;  }
+	
+	.boardIntro {
+		display: flex;
+		width: 500px;
+	}
+	
+	.profileImg {
+		width: 110px;
+		height: 80px;
+		display: inline-block;
+		border-radius: 100%;
+		margin-right: 10px;
+	}
+	
+	#p_img {
+		width: 80px;
+		height: 80px;
+	}
+	
+	#user_img {
+		width: 80px;
+		height: 80px;
+		border-radius: 100%;
+	}
+	
+	
+	
+	#board_writer {
+		font-weight: bold;
+		font-size: 18px;
+		display: inline-block;
+		margin-left: 10px;
+		width: 250px;
+	}
+	.date {
+		font-size: 12px; 
+		margin-left: 1px; 
+		color:#808080;
+	}
+	.fa-globe-asia { font-size: 11px;   }
+	.setting_wrap {
+		position: relative;
+		width: 50px;
+	}
+	
+	.setting {
+		color: #fe4662;
+		font-size: 20px;
+		width: 30px
+	}
+	
+	.addrAndMap {
+		text-align: right;
+		padding-right: 10px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	
+	.addressAndImage {
+		width: 500px;
+		margin: 5px auto 10px;
+		position: relative;
+		cursor: pointer;
+	}
+	
+	.AddrAndContent {	cursor: pointer;  }
+	
+	#select_link {
+		display: inline-block;
+		width: 500px;
+		height: 400px;
+	}
+	/* 좋아요 */ 
+    .like   { color: #fe4662; cursor: pointer;  }
+    .unlike { color: gray; cursor: pointer;     }
+	.like_btn {
+		border: none;
+		width: 60px;
+		cursor: pointer;
+		background-color: none;
+	}
+	.countIcon .fa-thumbs-up, .countIcon .fa-comments {
+		display: inline-block;
+	    padding: 0 5px 0 20px;
+	}
+	
+	.likesAndReplyCount {
+		border-top: 1px solid gray;
+		border-bottom: 1px solid gray;
+		height: 35px;
+		line-height: 35px;
+		display: flex;
+	}
+	.likesCount .replyCount { border: 1px solid #fe4662;  }
+	.imgSize {
+		width: 480px;
+		height: 320px;
+		overflow: hidden;
+		margin: 0 auto;
+	}
+	
+	#image, #video {
+		width: 480px;
+		overflow: hidden;
+	}
+	
+	.delete_update_form {
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		border-radius: 10px;
+		border: 1px solid rgba(50, 50, 50, 0.3);
+		margin: 0 auto;
+		margin-top: 20px;
+		padding: 3px;
+		text-align: center;
+		background-color: white;
+	}
+	
+	.delete_update_form li:first-child {
+		padding-bottom: 3px;
+		border-bottom: 1px solid rgba(50, 50, 50, 0.3);
+	}
+	
+	.delete_update_form li a {
+		font-size: 10px;
+		font-weight: 400;
+	}
+	
+	.delete_update_form li a:hover  { font-weight: bold; }
+	
+	.search_result_text {
+		width: 100%;
+		height: 30px;
+	    margin: 130px auto 0;
+		padding: auto auto;
+	}
+	
+	.search_result_wrap { 
+	text-align: center; 
+	margin-top: 150px;
+	}
+	.search_result_text h3 { display: inline; }
+	
+	 /* setting 관련 = 삭제 */
+     .id { width: 380px;  }
+	   
+	.setting_wrap{   text-align: right;  }
+    .setting { 
+	 	color: #696969;
+	 	font-size:15px;
+	 	width:20px;
+	 	cursor: pointer;
+   }
+   .b_no {  display: none; }
+   .b_see {
+      display: block;
+      z-index: 20;
+      width: 90px;
+      height: 25px;
+   }
+   .delete_form {
+       position:absolute;
+       top: 5px;
+       left: 5px;
+       border-radius: 10px;
+       border : 1px solid rgba(50,50,50,0.3);
+       margin: 0 auto;
+       margin-top: 20px;
+       padding: 5px;
+       text-align: center;
+       color: gray;
+       width: 110px;
+       height: 35px;
+       background-color: white;
+   	   font-size: 10px;
+       font-weight: 400;
+   }
+   .delete_form:hover{
+   	   cursor: pointer;
+   	   font-weight: bold; 
+   }
+   .profile_list_container {
+   	   display: flex;
+   	   width: 560px;
+   	   margin: 0 auto;
+   	   margin-bottom: 60px;
+   	   
+   }
+  .profile_each_container {
+  	text-align: center;
+  	margin: 10px;
+  }
+ 

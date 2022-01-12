@@ -1,0 +1,72 @@
+@charset "UTF-8";
+	
+	#admin_btn { border-bottom: 8px solid #fe4662; }
+	#admin_icon {  color: #fe4662; border: none; }
+	.nearbyInfWrap{		margin-top: 130px;	}
+	
+	
+   /* 총 정보*/
+	.nearbyInfo {
+		display: inline-block;
+		text-align:center;
+		width:100%;
+		height: 100px;
+		margin: 15px auto;
+		text-align: center;
+	
+	}
+	.totalInfoWrap {
+		display: inline-block;
+		margin: 7px auto;	
+	}
+	.totalInfo {
+		display: inline-block;
+		margin: 0 50px;
+	}
+	.total_info_name { font-size: 20px;  color : #787777}
+	.total_info_result { font-size: 30px; color :#454545; }
+	
+	
+	.search_input { height: 30px; }
+	
+	#query {
+		padding-left: 10px;
+		outline: none;
+	}
+	.search_btn {
+		width: 50px;
+		height: 30px;
+		color : white;
+		border : none;
+		outline: none;
+		border-radius: 5%;
+		background-color: #fe4662;
+		cursor: pointer;
+	}
+	#column { outline : none; }
+	
+	
+/* 	<!-- 차트관련 -->	 */
+  .chartjs {
+ 	width: 1950px;
+ 	height: 850px;
+ 	margin: 5px auto;
+  
+   }
+   .chartjs div {
+   	padding: 10px 80px;
+   }
+ .donutchart1{
+ 	margin-left: 30px;
+ }
+  .barchart2{
+ 	width: 100%;
+ 	margin: 10px auto;
+ }
+ #barchart2 { margin: 0 auto; padding-left: 30px; }
+ .genderAndAge {
+ 	width: 100%;
+ 	margin: 15px auto;
+ 	display: flex;
+ 	justify-content: center;
+ }

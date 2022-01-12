@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.nearby.repository.ProfileRepository">
+
+	<!-- 프로필 업로드 -->
+	<insert id="insertProfile" parameterType="Profile">
+		INSERT INTO PROFILE ( ID, P_CONTENT, P_ORIGIN, P_SAVED, P_PATH )
+		VALUES ( #{id}, #{pContent}, #{pOrigin}, #{pSaved}, #{pPath} )
+	</insert>
+	
+	
+	<!-- 프로필 사진 수정 + 삭제 -->
+	<update id="updateProfile" parameterType="Profile">
+		UPDATE PROFILE
+		   SET P_ORIGIN = #{pOrigin},
+		       P_SAVED = #{pSaved},
+		       P_PATH = #{pPath}
+		 WHERE ID = #{id}
+	</update>
+	
+	<!-- 프로필 컨텐트만 수정 -->
+	<update id="updateContent" parameterType="Profile">
+		UPDATE PROFILE
+		   SET P_CONTENT = #{pContent}
+		 WHERE ID = #{id}
+	</update>
+	
+	<!-- 프로필만 가져오기 -->
+	<select id="selectProfile" parameterType="String" resultType="Profile">
+		SELECT ID, P_CONTENT, P_ORIGIN, P_SAVED, P_PATH
+		  FROM PROFILE 
+		 WHERE ID = #{id}
+	</select>
+
+	
+</mapper>

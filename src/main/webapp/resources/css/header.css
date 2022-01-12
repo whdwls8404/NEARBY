@@ -1,0 +1,282 @@
+@charset "UTF-8";
+
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 14px;
+	
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+ul, li {
+	list-style-type: none;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	position: fixed;
+	top: 0;
+	z-index: 4000;
+	width: 100%;
+	height: 106px;
+	background-color: white;
+	border-bottom: 0.5px solid rgba(160, 160, 160, 0.5);
+	box-shadow: 5px 5px 8px rgba(160, 160, 160, 0.3);
+}
+
+.left_box {
+	width: 360px;
+	height: 100%;
+}
+
+.mid_box {
+	display: inline-flex;
+	margin: 0 auto;
+}
+
+.right_box {
+	display: inline-flex;
+	width: 400px;
+}
+
+.left_box > a {
+	display: block;
+	margin: 10px 0 10px 70px;
+	width: 230px;
+	height: 85px;
+	background-size: 219px 85px;
+	background-repeat: no-repeat;
+	background-image: url(../image/logo_color.png);
+	font-size: 0;
+}
+
+#logo_img {
+	width: 200px;
+	margin-top: 12px;
+	margin-left: 50px;
+}
+
+.text_icon_box {
+	display: none;
+	position: absolute;
+	height: 36px;
+	padding: 6px 20px;
+	border-radius:8px;
+	background-color: rgba(40, 40, 40, 0.7);
+	top:104px;
+}
+.t1 {margin-left: -121px}
+.t2 {margin-left: -131px}
+.t3 {margin-left: -134px}
+.t4 {margin-left: -161px}
+
+.btn_box {
+	display: flex;
+	text-align: center;
+	margin: 0 auto;
+	width: 750px;
+}
+
+.btn_box .boxes {
+	display: inline-block;
+	margin: 0 auto;
+	width: 187px;
+	height: 100%;
+}
+
+.boxes > a {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	flex-direction: row;
+}
+
+.btn_box li  a  i {
+	color: #6f7070;
+	text-align: center;
+	margin: 30px auto;
+	font-size: 40px;
+}
+
+
+
+a:link {
+	color: black;
+	text-decoration: none
+}
+
+a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+li>a:hover {
+	color: #fe4662;
+}
+
+.boxes:hover {
+	background-color: rgba(240, 242, 245, 0.7);
+	border-radius: 4px;
+}
+
+
+
+form {
+	display: inline-block;
+}
+.main_search {
+	position: absolute;
+	left: 1400px;
+	
+}
+
+.search_box {
+	display: flex;
+	border-radius: 10px;
+	margin-bottom: 30px;
+	margin-top: 26px;
+	border: none;
+	width: 280px;
+	height: 46px;
+	line-height: 20px;
+	background-color: #e8f0fe;
+}
+
+.search_box>input {
+	border: none;
+	outline: none;
+	width: 220px;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 8px;
+	margin-left: 18px;
+	background-color: #e8f0fe;
+}
+
+#search_icon {
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	margin-top: 4px;
+	margin-right: 16px;
+	border: none;
+	background-color: #e8f0fe;
+}
+
+#search_icon>i {
+	color: #6f7070;
+	width: 38px;
+	height: 38px;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+#profile_box {
+	position: absolute;
+	top : 20px;
+	left: 1760px;
+	width: 60px;
+	height: 60px;
+	border-radius: 100%;
+}
+
+#profile_img {
+	width: 60px;
+	height: 60px;
+	top: 20px;
+	border-radius: 100%;
+}
+
+#profile_menu {
+	z-index: 6000;
+    position: absolute;
+	top : 104px;
+	left: 1710px;
+	width: 160px;
+	height: 178px;
+	border: 1px solid rgb(240, 242, 245);
+	border-radius: 3px;
+	background-color: white;
+	box-shadow: 5px 5px 8px rgba(160, 160, 160, 0.3);
+}
+
+#profile_menu li {
+	margin-top: 4px;
+	margin-left: 4px;
+	font-size: 14px;
+	font-weight: lighter;
+	border-bottom: 1px solid rgb(240, 242, 245);
+}
+
+#profile_menu p {
+	font-size: 12px;
+	color: rgb(50, 50, 50);
+}
+
+.profile_no {
+	display: none;
+}
+
+.profile_see {
+	display: block;
+}
+
+#profile_menu_list1, #profile_menu_list2, #profile_menu_list3 ,  #profile_menu_list4,  #profile_menu_list5 {
+	font-size: 14px;
+	font-weight: normal;
+	color: rgb(100, 100, 100);
+}
+
+#profile_menu li:hover a{
+	cursor: pointer;
+	color: black;
+	font-weight: bold;
+}
+#profile_menu li:hover i{
+	cursor: pointer;
+	color: black;
+	font-weight: bold;
+}
+
+#profile_menu_list1 {
+	font-weight: bold;
+	font-size: 15px;
+	color: black;
+}
+#profile_menu_list5 {
+	border-bottom: none;
+}
+
+#profile_menu i {
+	font-size: 12px;
+	color: gray;
+	margin: 6px 4px;
+}
+
+.pointer:hover {
+	cursor: pointer;
+}
+.text_icon_box a {
+	color:white;
+	font-weight: 300;
+	font-size: 16px;
+	font-family: 'Noto Sans KR';
+}
+.boxes:hover +.text_icon_box {
+	display: inline-block;
+} 

@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+/* ------------------- reply 구역 ----------------- */
+
+	#reply_count_per_board {
+		margin: 10px;
+	}
+	.reply_user_img {
+		width:25px;
+		height: 25px;
+		border-radius: 100%;
+	}
+	.reply_count_box {
+		margin-left: 100px; 
+	}
+	#input_reply_table td:nth-of-type(1){
+		width:25px;
+	}
+	#input_reply_table #reply_user_name_area input[type=text]{
+		width: auto;
+	}
+	.insert_btn_area {
+		position: relative;
+	}
+	#insert_reply_btn {
+		right: 34px;
+		border-radius: 10px;
+	}
+	#input_reply_table input[type=text]{
+		margin: 5px;
+		width: 450px;
+	 	height: 24px; 
+		font-size: 12px;
+		outline-style: none;
+		padding:18px;
+		border-style: none;
+		background-color: #f0f2f5;
+		border-radius: 20px;
+	}
+	.disapear{
+		display: none;
+	}
+	
+		
+	/* 댓글 없을 때 */
+	.reply_none{
+		padding: 0 0 0 20px;
+		color: #525252;
+		font-size: 12px;
+	}
+	
+	/* 댓글 보여주는 구역 CSS */
+	.replyCount {
+		margin-left: 100px; 
+	}
+	.output_reply_area {
+		width: 500px; 
+		margin:10px auto 5px;
+	}
+	.reply_user_image_area {
+		width: 25px;
+	}
+	.reply_user_image_area .reply_user_img{
+		width:25px;
+	 	height: 25px;
+		margin: 5px;
+	}
+	.output_reply_area .reply_user_name_area{
+		color: black;
+		width: auto;
+	}
+	.like_icon_area {
+		font-size: 16px;
+		padding: 5px;
+	}
+	.input_row {
+		position: relative;
+	}
+	.input_row .reply_btns {
+		position: absolute;
+		top: 10px;
+		right: 20px;
+		background-color: #f0f2f5;
+	}
+	.btn_area {
+		position: relative;
+	}
+	.btn_area .show_reply_btn {
+		position: absolute;
+		right: 58px;
+		width: 30px
+	}
+	.delete_reply_btn {
+		position: absolute;
+		right: 28px;
+		width: 30px
+	}
+	.output_reply_table input[type=text]{
+		margin: 5px;
+		width: 490px;
+		height: 24px; 
+		font-size: 12px;
+		outline-style: none;
+		padding:18px;
+		border-style: none;
+		background-color: #f0f2f5;
+		border-radius: 20px;
+	}
+	.reply_content {
+		word-break: break-all;
+	}
+	.btn_area {
+		width: auto;
+	}
+	.reply_insert_btns{
+		margin-right:5px;
+		width:36px; 
+		font-size: 12px;
+		border: none;
+		padding: 5px 0 5px 0;
+		background-color:#fe4662;
+		color:white;
+		border-radius: 5px;
+	}
+	.reply_btns{
+		font-size: 12px;
+		border-style: none;
+		padding-right: 5px;
+		background-color: rgba(255, 250, 250, 0.8);
+		color: gray;
+	}
+	.reply_btns:hover{
+		text-decoration: underline;
+	}
+	
+	/* 페이징용 CSS */
+	#paging {
+	   display: flex;
+	   justify-content: center;
+	}
+	#paging > div {
+	   width: 35px;
+	   heigth: 20px;
+	   text-align: center;
+	}
+	.disable_link {
+	   color: lightgray;
+	}
+	.enable_link {
+	   cursor: pointer;
+	}
+	.now_page {
+	   color: #fe4662;
+	}

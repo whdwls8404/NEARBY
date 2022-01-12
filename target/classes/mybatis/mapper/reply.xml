@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.nearby.repository.ReplyRepository">
+
+		
+	<resultMap type="Profile" id="ProfileMap">
+		<result column="ID" property="id" />
+		<result column="P_CONTENT" property="pContent" />
+		<result column="P_ORIGIN" property="pOrigin" />
+		<result column="P_SAVED" property="pSaved" />
+		<result column="P_PATH" property="pPath" />
+	</resultMap>
+	<resultMap type="Reply" id="ReplyMap">
+		<result column="R_NO" property="rNo" />
+		<result column="ID" property="id" />
+		<result column="B_NO" property="bNo" />
+		<result column="R_CONTENT" property="rContent" />
+		<result column="R_LIKES" property="rLikes" />
+		<result column="R_CREATED" property="rCreated" />
+		<result column="R_MODIFIED" property="rModified" />
+		<result column="STATE" property="state" />
+ 		<result column="DEPTH" property="depth" />
+ 		<result column="GROUPNO" property="groupNo" />
+ 		<result column="GROUPORD" property="groupOrd" />
+		<collection property="profile" resultMap="ProfileMap" />
+	</resultMap>
+	
+	
+	<!-- 댓글 목록 가져오기 -->
+	<select id="selectReplyList" resultMap="ReplyMap" parameterType="Long">
+		 SELECT R.R_NO, R.ID, R.B_NO, R.R_CONTENT, R.R_LIKES, R.R_CREATED, R.R_MODIFIED, R.STATE, R.DEPTH, R.GROUPNO, R.GROUPORD, P.P_ORIGIN, P.P_SAVED, P.P_PATH
+		   FROM PROFILE P 
+		   LEFT JOIN REPLY R
+	         ON P.ID = R.ID
+	      WHERE R.B_NO = #{bNo}
+	</select>
+	
+	<!-- PAGING 용 SELECT... -->
+	<select id="selectReplyListForPaging" resultMap="ReplyMap" parameterType="Map">
+		SELECT B.RN, B.R_NO, B.ID, B.B_NO, B.R_CONTENT, B.R_LIKES, B.R_CREATED, B.R_MODIFIED, B.STATE, B.DEPTH, B.GROUPNO, B.GROUPORD, B.P_ORIGIN, B.P_SAVED, B.P_PATH
+		  FROM (SELECT  @ROWNUM := @ROWNUM +1 AS RN, A.R_NO, A.ID, A.B_NO, A.R_CONTENT, A.R_LIKES, A.R_CREATED, A.R_MODIFIED, A.STATE, A.DEPTH, A.GROUPNO, A.GROUPORD, A.P_ORIGIN, A.P_SAVED, A.P_PATH
+		          FROM (SELECT R.R_NO 
+		          			 , R.ID 
+		          			 , R.B_NO 
+		          			 , R.R_CONTENT 
+		          			 , R.R_LIKES
+		          			 , R.R_CREATED 
+		          			 , R.R_MODIFIED
+		          			 , R.STATE 
+		          			 , R.DEPTH 
+		          			 , R.GROUPNO 
+		          			 , R.GROUPORD 
+		          			 , P.P_ORIGIN 
+		          			 , P.P_SAVED 
+		          			 , P.P_PATH 
+		                  FROM PROFILE P LEFT JOIN REPLY R
+		                    ON P.ID = R.ID
+		                 WHERE R.B_NO = #{bNo}
+		                   AND R.STATE = 0
+		                 ORDER BY R.R_CREATED DESC, GROUPORD ASC) A) B
+		 LIMIT #{beginRecord}, #{recordPerPage}	   
+	</select>
+	
+	<!-- total 댓글수 per 게시글 -->
+	<select id="selectTotalCountPerBoard" parameterType="Long" resultType="int">
+		SELECT COUNT(R_NO)
+		  FROM REPLY
+		 WHERE B_NO = #{bNo}
+	</select>
+	
+	
+	<!-- 댓글 삽입하기 -->
+	<insert id="insertReply" parameterType="Reply">
+	    INSERT INTO REPLY ( ID, B_NO, R_CONTENT, R_LIKES, R_CREATED, R_MODIFIED, STATE, DEPTH, GROUPNO, GROUPORD )
+		VALUES ( #{id}, #{bNo}, #{rContent}, 0, NOW(), NOW(), 0, #{depth}, #{groupNo}, #{groupOrd})
+	</insert>
+	
+	<!-- 댓글 업데이트 : 삽입과 동시에 이뤄 짐? -->
+	<update id="updatePreviousReplyGroupOrd" parameterType="Reply">
+		UPDATE REPLY
+		   SET GROUPORD = GROUPORD + 1
+		 WHERE GROUPNO = #{groupNo}		<!-- 같은    groupNo 인가? -->
+		   AND GROUPORD > #{groupOrd}	<!-- 원글의 groupOrd 보다 큰 댓글인가? -->
+	</update>
+	
+	<!-- 댓글 내용 업데이트 -->
+	<update id="updateReply" parameterType="Reply">
+		UPDATE REPLY
+		   SET R_CONTENT = #{rContent}, R_MODIFIED = NOW()
+		 WHERE R_NO = #{rNo}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="Long">
+		DELETE FROM REPLY WHERE R_NO = #{rNo}
+	</delete>
+
+	
+</mapper>

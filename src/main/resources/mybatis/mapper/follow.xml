@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.nearby.repository.FollowRepository">
+
+	<resultMap type="Follow" id="FollowMap">
+		<result column="F_NO" property="fNo" />
+		<result column="FOLLOWING_ID" property="followingId" />
+		<result column="FOLLOWED_ID" property="followedId" />
+		<collection property="profile" resultMap="ProfileMap" />
+	</resultMap>
+	
+	<resultMap type="Profile" id="ProfileMap">
+		<result column="ID" property="id" />
+		<result column="P_CONTENT" property="pContent" />
+		<result column="P_ORIGIN" property="pOrigin" />
+		<result column="P_SAVED" property="pSaved" />
+		<result column="P_PATH" property="pPath" />
+	</resultMap>
+	
+	
+	<!--  팔로잉하기 -->
+	<insert id="following" parameterType="Follow" >	
+		INSERT INTO FOLLOW ( FOLLOWING_ID, FOLLOWED_ID)
+		VALUES ( #{followingId} , #{followedId} )	
+	</insert>
+	
+	
+	<!--  언팔하기 -->
+	<delete id="unfollowing" parameterType="Follow" >
+		DELETE FROM FOLLOW
+		 WHERE FOLLOWING_ID = #{followingId} 
+		   AND FOLLOWED_ID = #{followedId}	
+	</delete>
+ 
+ 
+	<!--  회원탈퇴시 관련된 모든 팔로잉 삭제 -->
+	<delete id="deleteLeaveMebmberFollow" parameterType="Long">
+ 		DELETE FROM FOLLOW
+		 WHERE FOLLOWED_ID = (SELECT ID
+                                FROM MEMBER
+                               WHERE M_NO = #{mNo}) 
+		    OR FOLLOWING_ID = (SELECT ID
+                                 FROM MEMBER
+                                WHERE M_NO = #{mNo}) 							   
+	</delete>
+	
+	<!--  id로 팔로잉하는 id 및 프로필 사진 목록 가져오기 -->
+	<select id="selectFollowingIdById" parameterType="String" resultMap="FollowMap">
+		SELECT F.FOLLOWING_ID, F.FOLLOWED_ID, P.ID, P.P_ORIGIN, P.P_SAVED, P.P_PATH, P.P_CONTENT
+  		  FROM FOLLOW F LEFT JOIN PROFILE P
+            ON F.FOLLOWED_ID = P.ID
+         WHERE F.FOLLOWING_ID = #{id}
+         ORDER BY F.FOLLOWED_ID ASC
+	</select>
+	
+	<!--  id를 팔로우하는 id 및 프로필 사진 목록 가져오기 -->
+	<select id="selectFollowedIdById" parameterType="Follow" resultMap="FollowMap">
+		SELECT F.FOLLOWING_ID, F.FOLLOWED_ID, P.P_ORIGIN, P.P_SAVED, P.P_PATH, P.P_CONTENT
+  		  FROM FOLLOW F LEFT JOIN PROFILE P
+            ON F.FOLLOWING_ID = P.ID
+         WHERE F.FOLLOWED_ID = #{id}
+         ORDER BY F.FOLLOWING_ID ASC
+	</select>
+	
+	<!--  팔로잉 팔로워 여부 확인하기 -->
+	<select id="checkFollow" parameterType="Map" resultType="int">
+		SELECT count(ID)
+          FROM PROFILE
+         WHERE ID IN (SELECT FOLLOWED_ID
+                        FROM FOLLOW
+                       WHERE FOLLOWING_ID = #{followingId}) 
+           AND ID = #{id}  
+	</select>
+	
+	
+	
+	
+</mapper>

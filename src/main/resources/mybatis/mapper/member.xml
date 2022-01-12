@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.nearby.repository.MemberRepository">
+	
+	<resultMap type="Likes" id="LikesMap">
+		<result column="LIKE_NO" property="likeNo" />
+		<result column="B_NO" property="bNo" />
+		<result column="ID" property="id" />
+		<result column="LIKE_CHECK" property="likeCheck" />
+		<result column="LIKE_DATE" property="likeDate" />
+	</resultMap>
+	
+	
+	<resultMap type="Profile" id="ProfileMap">
+		<result column="ID" property="id" />
+		<result column="P_CONTENT" property="pContent" />
+		<result column="P_ORIGIN" property="pOrigin" />
+		<result column="P_SAVED" property="pSaved" />
+		<result column="P_PATH" property="pPath" />
+	</resultMap>
+	
+	<resultMap type="Member" id="MemberMap">
+		<result column="M_NO" property="mNo" />
+		<result column="ID" property="id" />
+		<result column="PW" property="pw" />
+		<result column="NAME" property="name" />
+		<result column="EMAIL" property="email" />
+		<result column="BIRTHDAY" property="birthday" />
+		<result column="PHONE" property="phone" />
+		<result column="GENDER" property="gender" />
+		<result column="STATE" property="state" />
+		<result column="M_CREATED" property="mCreated" />
+		<collection property="profile" resultMap="ProfileMap" />
+		<collection property="likes" resultMap="LikesMap" />
+	</resultMap>
+	
+
+   <!-- 회원가입 -->
+     <insert id="joinMember" parameterType="Member">
+        INSERT INTO MEMBER (ID, PW, NAME, EMAIL, BIRTHDAY, PHONE, GENDER, STATE, M_CREATED )
+     	VALUES ( #{id}, #{pw}, #{name}, #{email}, #{birthday}, #{phone}, #{gender}, 0, DATE_SUB(NOW(), INTERVAL 9 HOUR))
+     </insert>
+
+
+   <!-- 아이디 중복 확인  -->
+	<select id="idCheck" parameterType="String" resultType="Member">
+		SELECT ID, PW, NAME, EMAIL
+		  FROM MEMBER
+		 WHERE ID = #{id} 
+	</select>
+
+    <!-- 이메일 중복 확인 + 아이디 찾기  -->
+	<select id="selectByEmail" parameterType="String" resultType="Member">
+		SELECT ID, PW, NAME, EMAIL
+		 FROM MEMBER
+		 WHERE EMAIL = #{email} 
+	</select>
+
+	<!-- 비밀번호 찾기 / 임시 비밀번호로 수정 됨 -->
+	<update id="findPw" parameterType="Member">
+		UPDATE MEMBER
+		   SET PW = #{pw}
+		 WHERE EMAIL = #{email}
+	</update>
+
+   <!-- 로그인  -->	
+   <select id="login" parameterType="Member" resultMap="MemberMap">
+      SELECT M.M_NO, M.ID, M.PW, M.NAME, M.EMAIL, M.BIRTHDAY, M.PHONE, M.GENDER, M.STATE, P.P_CONTENT, P.P_ORIGIN, P.P_SAVED, P.P_PATH
+ 	    FROM MEMBER M
+       RIGHT OUTER JOIN PROFILE P
+		  ON M.ID = P.ID
+       WHERE M.ID = #{id} AND M.PW = #{pw} AND M.STATE = 0
+   </select>
+	 
+	<!-- 회원정보 조회용 -->
+	<select id="selectMemberById" parameterType="Member" resultMap="MemberMap">
+	  SELECT M.M_NO, M.ID, M.NAME, M.EMAIL, M.BIRTHDAY, M.PHONE, M.GENDER, M.STATE, P.P_CONTENT, P.P_ORIGIN, P.P_SAVED, P.P_PATH
+		  FROM MEMBER M
+         RIGHT OUTER JOIN PROFILE P
+	  	    ON M.ID= P.ID
+         WHERE M.ID = #{id} AND M.STATE = 0
+	 </select>
+	
+	<!-- 비밀번호 확인용 -->
+	<select id="selectPassword" parameterType="String" resultType="int">
+		SELECT count(*)
+		  FROM MEMBER
+		 WHERE PW = #{pw} AND STATE = 0
+	</select>
+	
+	<!-- 비밀번호 수정  -->
+	<update id="updatePw" parameterType="Member">
+		UPDATE MEMBER
+		   SET PW = #{pw}
+		 WHERE EMAIL = #{email}
+	</update>
+	
+	<!-- 내정보 수정  name, birthday ,gender, phone  -->
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER
+		   SET NAME = #{name}
+		      , BIRTHDAY = #{birthday}
+		      , GENDER = #{gender}
+		      , PHONE = #{phone}
+		 WHERE M_NO = #{mNo} AND Id = #{id}
+	</update>
+
+	
+	<!-- 회원탈퇴 -->
+	<update id="leaveMember" parameterType="Long">
+		UPDATE MEMBER
+		   SET STATE = -1
+		 WHERE M_NO = #{mNo}
+	</update>
+	
+    <!-- 관리자만 가능한 회원 활성화 기능 -->
+    <update id="reInsertMember" parameterType="Long">
+      UPDATE MEMBER
+  	     SET STATE = 0
+  	   WHERE M_NO = #{mNo} 
+    </update>
+	
+	<!-- 총 멤버 관리자 제외 -->
+	<select id="memberCount" resultType="Member">
+		SELECT M.M_NO, M.ID, M.NAME, M.EMAIL, M.BIRTHDAY, M.PHONE, M.GENDER, M.STATE, M_CREATED
+		  FROM MEMBER M
+	     WHERE M.STATE = 0 AND M.ID NOT LIKE 'admin'
+    </select>
+
+
+	<!-- 가입 한 남자  -->
+	<select id="memberMen" resultType="Member">
+		SELECT M_NO, ID, NAME, EMAIL, BIRTHDAY, PHONE, GENDER, STATE, M_CREATED
+		  FROM MEMBER
+	     WHERE STATE = 0 AND ID NOT LIKE 'admin'
+	       AND GENDER = 'm'
+    </select>
+	
+	
+	<!-- 가입 한 여자 -->
+	<select id="memberWomen" resultType="Member">
+		SELECT M_NO, ID, NAME, EMAIL, BIRTHDAY, PHONE, GENDER, STATE, M_CREATED
+		  FROM MEMBER
+	     WHERE STATE = 0 AND ID NOT LIKE 'admin'
+	       AND GENDER = 'f'
+    </select>
+	
+   <!-- 가입 한 성별 그외  -->
+	<select id="memberNoGender" resultType="Member">
+		SELECT M_NO, ID, NAME, EMAIL, BIRTHDAY, PHONE, GENDER, STATE, M_CREATED
+		  FROM MEMBER
+	     WHERE STATE = 0 AND ID NOT LIKE 'admin'
+	       AND GENDER = 'n'
+    </select>
+	
+   <!-- 오늘 가입 한 유저  -->
+	<select id="memberCreatedDay" resultType="Member">
+		SELECT M_NO, ID, NAME, EMAIL, BIRTHDAY, PHONE, GENDER, STATE, M_CREATED
+		  FROM MEMBER
+	     WHERE STATE = 0 AND ID NOT LIKE 'admin'
+	       AND DATE_FORMAT( M_CREATED , 'YY/MM/DD') = DATE_FORMAT(NOW(), 'YY/MM/DD')
+    </select>
+    
+    <!-- 10대  -->
+    <select id="memberAge10" resultType="Member">
+       SELECT  A.M_NO, A.ID, A.NAME, A.BIRTHDAY
+  		 FROM (SELECT M_NO, ID, NAME, BIRTHDAY,  (DATE_FORMAT(NOW(),'%Y')-SUBSTRING(BIRTHDAY,1,4)) AS AGE
+                FROM MEMBER WHERE STATE = 0 AND ID NOT LIKE 'admin' ) A
+         WHERE AGE  BETWEEN 10 AND 19
+    </select>
+                
+         
+    
+    
+    
+      <!-- 20대  -->
+    <select id="memberAge20" resultType="Member">
+       SELECT A.M_NO, A.ID, A.NAME, A.BIRTHDAY
+  		 FROM (SELECT M_NO, ID, NAME, BIRTHDAY, (DATE_FORMAT(NOW(),'%Y')-SUBSTRING(BIRTHDAY,1,4)) AS AGE
+                FROM MEMBER WHERE STATE = 0 AND ID NOT LIKE 'admin' ) A
+         WHERE AGE  BETWEEN 20 AND 29 
+    </select>
+    
+      <!-- 30대  -->
+    <select id="memberAge30" resultType="Member">
+       SELECT A.M_NO, A.ID, A.NAME, A.BIRTHDAY
+  		 FROM (SELECT M_NO, ID, NAME, BIRTHDAY, (DATE_FORMAT(NOW(),'%Y')-SUBSTRING(BIRTHDAY,1,4)) AS AGE
+                FROM MEMBER WHERE STATE = 0 AND ID NOT LIKE 'admin' ) A
+         WHERE AGE  BETWEEN 30 AND 39
+    </select>
+    
+    <!-- 40대  -->
+    <select id="memberAge40" resultType="Member">
+       SELECT  A.M_NO, A.ID, A.NAME, A.BIRTHDAY
+  		 FROM (SELECT  M_NO, ID, NAME, BIRTHDAY, (DATE_FORMAT(NOW(),'%Y')-SUBSTRING(BIRTHDAY,1,4)) AS AGE
+                FROM MEMBER WHERE STATE = 0 AND ID NOT LIKE 'admin' ) A
+         WHERE AGE  BETWEEN 40 AND 49 
+    </select>
+    
+    <!-- 50대 이상  -->
+    <select id="memberAge50" resultType="Member">
+       SELECT A.M_NO, A.ID, A.NAME, A.BIRTHDAY
+  		 FROM (SELECT  M_NO, ID, NAME, BIRTHDAY, (DATE_FORMAT(NOW(),'%Y')-SUBSTRING(BIRTHDAY,1,4)) AS AGE
+                FROM MEMBER WHERE STATE = 0 AND ID NOT LIKE 'admin' ) A
+         WHERE <![CDATA[  age > 50  ]]>
+    </select>
+    
+    
+    <!-- 검색 수  -->
+   <select id="selectFindRecordCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*) 
+	      FROM 	MEMBER
+	     WHERE 1=1 AND ID NOT LIKE 'admin'
+	      <if test="column == 'ID' "> AND UPPER(${column}) LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%')) </if>
+	      <if test="column == 'NAME' "> AND UPPER(${column}) LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%')) </if>
+	      <if test="column == 'EMAIL' "> AND UPPER(${column}) LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%'))</if>
+	      <if test="column == 'BIRTHDAY' "> AND UPPER(${column}) LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%')) </if>
+	      <if test="column == 'GENDER' "> AND UPPER(${column})  LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%'))  </if>
+	</select>
+   
+  
+   <select id="selectFindList" parameterType="Map" resultType="Member">
+    SELECT  B.RN, B.M_NO, B.ID, B.NAME, B.EMAIL, B.BIRTHDAY, B.PHONE, B.GENDER, B.STATE, B.M_CREATED
+		  FROM  (  SELECT @ROWNUM := @ROWNUM +1 AS RN, A.M_NO, A.ID, A.NAME, A.EMAIL, A.BIRTHDAY, A.PHONE, A.GENDER, A.STATE, A.M_CREATED
+		             FROM  ( SELECT M_NO, ID, NAME, EMAIL, BIRTHDAY, PHONE, GENDER, STATE, M_CREATED 
+		             	       FROM MEMBER 
+							  WHERE 1=1 AND ID NOT LIKE 'admin'
+						      <if test="column == 'ID' "> AND UPPER(${column}) LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%')) </if>
+						      <if test="column == 'NAME' "> AND UPPER(${column}) LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%')) </if>
+						      <if test="column == 'EMAIL' "> AND UPPER(${column}) LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%'))</if>
+						      <if test="column == 'BIRTHDAY' "> AND UPPER(${column}) LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%')) </if>
+						      <if test="column == 'GENDER' "> AND UPPER(${column}) LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%')) </if>	    
+		             	      ORDER BY M_NO ASC ) A ) B
+		 LIMIT #{beginRecord}, #{recordPerPage}	             	       
+		             	        
+  </select>
+
+  
+</mapper>

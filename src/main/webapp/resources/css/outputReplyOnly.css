@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+
+/* ------------------- reply 구역 ----------------- */
+/* 폰트 size / spacing */
+	.re_content_area {
+		letter-spacing: 0.4px;
+		font-size: 14px;
+	}
+	.input_reply_area {
+		margin: 0 0 10px 0;
+	}
+	.reply_user_img {
+		width:20px;
+		height: 20px;
+		margin: 5px;
+		border-radius: 100%;
+	}
+	#input_reply_table td:nth-of-type(1){
+		width:20px;
+	}
+	#input_reply_table #reply_user_name_area input[type=text]{
+		width: auto;
+	}
+	#input_reply_table input[type=text]{
+		margin: 5px;
+		width: 378px;
+		height: 22px;
+		font-size: 12px;
+		outline-style: none;
+	}
+	
+	/* 댓글 없을 때 */
+	.reply_none{
+		padding: 15px 0 0 20px;
+		color: #525252;
+		font-size: 12px;
+	}
+	
+	/* 댓글 보여주는 구역 CSS */
+	
+	.reply_user_image_area{
+		width: 25px;
+	}
+	.reply_user_image_area .reply_user_img{
+		width:25px;
+		height: 25px;
+		margin: 5px;
+	}
+	.output_reply_area .reply_user_name_area{
+		color: black;
+		width: auto;
+	    font-weight: 600;
+	}
+	.like_icon_area {
+		font-size: 16px;
+		padding: 5px;
+	}
+	.output_reply_table input[type=text]{
+		margin: 5px;
+		width: 98%;
+		height: 24px;
+		font-size: 12px;
+		outline-style: none;
+	}
+	.btn_area {
+		width: auto;
+	}
+	.reply_btns{
+		margin-right:5px;
+		width:36px; 
+		font-size: 12px;
+		border: none;
+		padding: 5px 0 5px 0;
+		background-color: pink;
+		border-radius: 5px;
+	}
+  	.pointer {
+  		cursor: pointer;
+  	} 

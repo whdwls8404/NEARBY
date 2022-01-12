@@ -1,0 +1,302 @@
+@charset "UTF-8";
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 기본 레이아웃 */
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	border-collapse: collapse;
+}
+
+
+a{
+    text-decoration: 0;
+}
+
+ul, ol{
+    list-style-type: none;
+}
+#follow_btn {
+	border-bottom: 8px solid #fe4662;
+}
+
+#follow_icon {
+	color: #fe4662;
+}
+.header {
+	margin-top: 130px;
+}
+.no_board{
+	margin-top: 30px;
+	text-align: center;
+	font-size: 24px;
+}
+.no_board > h1{font-size: 24px;}
+
+/* body */
+body {
+	background-color: #fafafa;
+}
+
+/* section */
+.board{
+	display: block;
+	margin: 0 auto;
+	width: 700px;
+	
+}
+
+/* 상단 유저를 표식 */
+.user_box{
+    display: flex;
+    margin: 20px 0 5px 0;
+    width: 100%; height: 120px;
+}
+
+/* 유저 프로필 이미지 */
+.user_img_box{
+    width: 100px; height: 150px;
+    border: none;
+}
+#user_img{
+    display: flex;
+    margin:  10px 10px 10px 30px;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    font-size: 0;
+}
+.friend_box {
+	display: flex;
+	width: 400px;
+	height: 100px;
+	padding-left: 20px;
+	padding-top: 14px;
+}
+
+
+/* 유저 이미지 size만 지정 */
+.user_img_box > #user_img{
+    display: flex;
+    margin: 10px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    font-size: 0;
+}
+
+/* 게시물, 팔로워, 팔로잉, 자기소개 */
+.user_item_box{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    width: 340px; height: 150px;
+}
+
+.user_item_box > span{
+    display: block;
+    margin: 10px;
+    font-size: 18px;
+}
+.follow_container {
+	width: 600px;
+	border-radius: 8px;
+	box-shadow: 5px 10px 15px 3px gray;
+	background-color: #fefafa;
+	border: 2px solid #ffc0cb;
+	
+}
+
+
+.board_intro > #user_img {
+    display: block;
+    margin: 10px 0 10px 40px;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background-size: 90px 90px;
+    font-size: 0;
+}
+#friends_img {
+    display: inline;
+    margin: 10px 0 10px -10px;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background-size: 30px 30px;
+    font-size: 0;
+}
+
+
+
+
+/* 이름 */
+.user_id {
+    display: inline-block;
+    width: 420px; height: 80px;
+    padding: 10px 0 0 20px;
+}
+
+#userNameText {
+	font-size: 14px;
+	font-weight: lighter;
+	color: gray;
+}
+
+#board_writer{
+    padding-left: 15px;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.fa-cog{
+    font-size: 25px;
+    color: gray;
+}
+
+.update_box{
+    display: inline-block;
+    margin: 10px 10px 0 0;
+    width: 60px; height: 80px;
+}
+
+.update_box > a{
+    display: block;
+    margin-left: 35px;
+    width: 25px; height: 25px;
+}
+
+
+.fa-map-marker-alt{
+	font-size: 15px;
+    color: #fe4662;
+}
+
+/* 게시글 1개 board_body */
+.board_body{
+    display: block;
+    margin: 10px 0 10px 0;
+    padding-bottom: 10px;
+    width: 560px;
+}
+
+.addrAndMap{
+    display: block;
+    text-align: right;
+    margin-right: 40px;
+    margin-bottom: 5px;
+}
+
+.content{
+    display: block;
+    margin-top: 5px;
+    width: 100%; height: 100%;
+}
+
+.content > span{
+    display: block;
+    width: 556px;
+    background-color: #ffffff;
+    padding: 10px 0 15px 40px;
+}
+
+
+/* 이미지/ 비디오 사이즈 */
+.imgSize {
+    display: block;
+    margin: 0 auto;
+	width: 480px;
+	overflow: hidden;
+}
+
+
+.select_box {
+	display: flex;
+	width: 100%;
+	height: 60px;
+	
+}
+
+.select_box h3 {
+	line-height: 60px;
+	text-align: center;
+	
+}
+
+
+
+#right_select_box {
+	z-index: 1000;
+
+}
+#left_select_box, #right_select_box {
+	width: 50%;
+	text-align: center;
+
+
+}
+
+.content_box {
+	position: relative;
+	width: 100%;
+
+	
+}
+.left_follow_box, .right_follow_box {
+	width: 100%;
+
+}
+#follower_text, #following_text {
+	padding-top: 20px;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.checked {
+	border-bottom: 6px solid #fe4662;
+}
+.unchecked {
+	border: none;
+}
+.checked1 {
+	color: #fe4662;
+	font-weight: bold;
+}
+.unchecked1 {
+	color: gray;
+	font-weight: light;
+}	
+.follow_see {
+	display: block;
+} 
+.follow_no {
+	display: none;
+}
+
+.each_follow_box {
+	display: flex;
+	padding-top: 10px;
+}
+.each_follow_box .no_follow {
+	margin: 50px auto;
+	
+}
+.profile_next_content {
+	position: absolute;
+	left: 100px;
+	margin-top: 40px;
+	font-weight: 300;
+	color: darkgray;
+	font-size: 12px;
+
+}
+.profile_next_id {
+	margin-top: 16px;
+	font-weight: 600;
+	
+}
+

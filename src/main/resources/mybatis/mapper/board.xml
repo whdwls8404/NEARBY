@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.nearby.repository.BoardRepository">
+ 	<resultMap type="Profile" id="ProfileMap">
+		<result column="ID" property="id" />
+		<result column="P_CONTENT" property="pContent" />
+		<result column="P_ORIGIN" property="pOrigin" />
+		<result column="P_SAVED" property="pSaved" />
+		<result column="P_PATH" property="pPath" />
+	</resultMap>
+	
+	<resultMap type="Likes" id="LikesMap">
+		<result column="LIKE_NO" property="likeNo" />
+		<result column="B_NO" property="bNo" />
+		<result column="ID" property="id" />
+		<result column="LIKE_CHECK" property="likeCheck" />
+		<result column="LIKE_DATE" property="likeDate" />
+	</resultMap>
+	
+ 	<resultMap type="Board" id="BoardMap">
+ 		<result column="B_NO" property="bNo" />
+ 		<result column="ID" property="id" />
+ 		<result column="CONTENT" property="content" />
+ 		<result column="IP" property="ip" />
+ 		<result column="LOCATION" property="location" />
+ 		<result column="ORIGIN" property="origin" />
+ 		<result column="SAVED" property="saved" />
+ 		<result column="PATH" property="path" />
+ 		<result column="LIKES" property="likes" />
+ 		<result column="CREATED" property="created" />
+ 		<result column="MODIFIED" property="modified" />
+ 		<result column="STATE" property="state" />
+ 		<result column="DEPTH" property="depth" />
+ 		<result column="GROUPNO" property="groupNo" />
+ 		<result column="GROUPORD" property="groupOrd" />
+ 		<collection property="profile" resultMap="ProfileMap" />
+ 		<collection property="like" resultMap="LikesMap" />
+ 	</resultMap>
+ 
+ 	<!-- 메인 보드 리스트 뿌리기  -->
+   <select id="selectListBoard" resultMap="BoardMap">
+      SELECT B.B_NO, B.ID, B.CONTENT, B.IP, B.LOCATION, B.ORIGIN, B.SAVED, B.LIKES, B.CREATED, B.PATH, B.MODIFIED, B.STATE,
+	   	       P.ID, P.P_ORIGIN, P.P_SAVED, P.P_PATH,
+	   	       L.LIKE_NO, L.LIKE_CHECK, L.LIKE_DATE
+	   	 FROM BOARD B LEFT JOIN  PROFILE P
+	       ON  B.ID = P.ID
+	     LEFT JOIN  LIKES L
+	   	   ON B.ID = L.ID
+	    WHERE STATE = 0
+	    ORDER BY b.B_NO DESC
+   </select>
+   
+   
+	
+  <!-- 게시판 하나 상세보기 -->
+	<select id="selectBoardByNo" parameterType="Long" resultMap="BoardMap">
+	    SELECT  B.B_NO, B.ID, B.CONTENT, B.IP, B.LOCATION, B.ORIGIN, B.SAVED, B.LIKES, B.CREATED, B.PATH, B.MODIFIED, B.STATE, P.ID, P.P_ORIGIN, P.P_SAVED, P.P_PATH, L.b_NO, L.LIKE_NO, L.LIKE_CHECK, L.LIKE_DATE
+		  FROM BOARD B 
+		  LEFT JOIN  PROFILE P
+            ON  B.ID = P.ID
+          LEFT JOIN  LIKES L
+   	        ON B.ID = L.ID
+	     WHERE B.B_NO = #{bNo}
+	       AND B.STATE = 0
+	</select>
+	
+  <!-- 글 업로드 -->	
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO BOARD (ID, CONTENT, IP, LOCATION, ORIGIN, SAVED, PATH, LIKES, CREATED, MODIFIED, STATE, DEPTH, GROUPNO, GROUPORD )
+		VALUES ( #{id}, #{content}, #{ip}, #{location}, #{origin}, #{saved}, #{path}, 0, DATE_SUB(NOW(), INTERVAL 9 HOUR), DATE_SUB(NOW(), INTERVAL 9 HOUR), 0, 0, 0, 0)
+	</insert>
+	
+  <!-- 글 수정- login id=글 id와 번호 같을 때 수정가능 -->
+ 	<update id="updateBoard" parameterType="Board">
+ 		UPDATE BOARD 
+ 		   SET CONTENT = #{content},
+ 		       LOCATION = #{location},
+ 		       PATH = #{path},
+ 		       ORIGIN = #{origin},
+ 		       SAVED = #{saved},
+ 		       MODIFIED = NOW() 
+ 	     WHERE B_NO = #{bNo}
+ 	</update>
+	
+	
+	<!--  글삭제 -->
+	<update id="deleteBoard" parameterType="Map">
+		UPDATE BOARD
+		   SET STATE = -1
+		 WHERE ID = #{id} AND B_NO=#{bNo}
+	</update>
+	
+	
+	<!--  관리자의 글삭제 -->
+	<update id="adminBoardDelete" parameterType="Long">
+		UPDATE BOARD
+		   SET STATE = -1
+		 WHERE B_NO=#{bNo}
+	</update>
+	
+	
+	<!--  좋아요 -->
+	<update id="boardLike" parameterType="Board">
+		UPDATE BOARD 
+		  SET LIKES = LIKES + 1
+		WHERE B_NO=#{bNo}
+	</update>
+	
+	<!--  좋아요 취소 -->
+	<update id="boardLikeCancel" parameterType="Board">
+		UPDATE BOARD 
+		  SET LIKES = LIKES - 1
+		WHERE B_NO=#{bNo}
+	</update>
+	
+	<!--  좋아요 카운트  -->
+	<select id="boardLikesCount" parameterType="Board" resultType="Board">
+		SELECT LIKES 
+		  FROM BOARD
+		 WHERE B_NO= #{bNo}
+	</select>
+
+	   
+	<!--  로그인한 유저가 각 보드에 좋아요 함(1) 안함(0) 구분 셀렉절 -->   
+	 <select id="selectLikePerBoard" parameterType="Map" resultType="int">
+	    SELECT COUNT(B_NO)
+ 		  FROM LIKES
+ 		 WHERE ID IN ((SELECT ID
+                         FROM LIKES
+                        WHERE  ID in ((  SELECT L.ID
+                                     FROM BOARD B RIGHT JOIN LIKES L
+                                       ON B.B_NO = L.B_NO
+                                    WHERE B.B_NO = #{bNo}  ))
+                                     AND B_NO = #{bNo}))
+         AND ID = #{id} and B_NO = #{bNo}
+	 </select>
+	   
+	 	   
+	   
+	   
+    <!-- 관리자를 위한  지역 select문  -->
+	<select id="adminBoardList" resultMap="BoardMap">
+        SELECT B.B_NO, B.ID, b.CONTENT, B.IP, B.LOCATION, B.ORIGIN, B.SAVED, B.LIKES, B.CREATED, B.PATH, B.MODIFIED, B.STATE
+          FROM BOARD B 
+         WHERE B.STATE = 0
+    </select>
+    
+    <!--  통합 검색 리스트 -->
+	<select id="searchListBoard" parameterType="Map" resultMap="BoardMap">
+   	    SELECT B.B_NO, B.ID, B.CONTENT, B.IP, B.LOCATION, B.ORIGIN, B.SAVED, B.LIKES, B.CREATED, B.PATH, B.MODIFIED, B.STATE, P.ID, P.P_ORIGIN, P.P_SAVED, P.P_PATH
+   	      FROM BOARD B LEFT JOIN PROFILE P
+   	        ON B.ID = P.ID 
+   	     WHERE UPPER(B.ID) LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%'))
+   	        OR UPPER(B.CONTENT)  LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%'))
+   	        OR B.LOCATION  LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%'))
+   	     ORDER BY B.B_NO DESC
+    </select>
+    
+     <!--  ID 검색 리스트 -->
+    <select id="searchProfileList" parameterType="Map" resultType="Profile">
+    	SELECT ID, P_ORIGIN, P_SAVED, P_PATH
+    	  FROM PROFILE
+    	 WHERE UPPER(ID) LIKE CONCAT('%', CONCAT(IFNULL(#{query}, ''), '%'))
+    	   AND UPPER(ID) NOT LIKE UPPER('admin')
+    	 ORDER BY ID ASC
+    </select>
+    
+    <!-- myHome 게시물 목록 -->
+   <select id="selectMyHomeList" resultMap="BoardMap">
+      SELECT B.B_NO, B.ID, B.CONTENT, B.IP, B.LOCATION, B.ORIGIN, B.SAVED, B.LIKES, B.CREATED, B.PATH, B.MODIFIED, B.STATE,
+	   	       P.ID, P.P_ORIGIN, P.P_SAVED, P.P_PATH,
+	   	       L.LIKE_NO, L.LIKE_CHECK, L.LIKE_DATE
+	   	 FROM BOARD B LEFT JOIN  PROFILE P
+	       ON  B.ID = P.ID
+	     LEFT JOIN  LIKES L
+	   	   ON B.ID = L.ID
+	    WHERE STATE = 0
+	      AND B.ID = #{id}
+	    ORDER BY b.B_NO DESC
+   </select>    
+    
+    <!-- myHome 유저의 게시물 갯수 -->
+	<select id="selectUserBoardsCount" resultType="int" parameterType="String">
+		SELECT COUNT(B_NO)
+		  FROM BOARD
+		 WHERE ID = #{id}
+		   AND STATE = 0
+	</select>
+	
+    <!-- userHome -->
+    <select id="selectUserHome" resultMap="BoardMap" parameterType="String">
+	    SELECT B.B_NO, B.CONTENT, B.IP, B.LOCATION, B.ORIGIN, B.SAVED, B.LIKES, B.CREATED, B.PATH, B.MODIFIED, B.STATE, P.ID, P.P_ORIGIN, P.P_SAVED, P.P_PATH
+          FROM BOARD B RIGHT JOIN PROFILE P
+            ON B.ID = P.ID
+         WHERE P.ID = #{id}
+           AND B.STATE = 0
+         ORDER BY B.B_NO DESC
+    </select>	
+	
+</mapper>

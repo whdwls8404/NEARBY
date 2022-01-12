@@ -1,0 +1,143 @@
+@charset "UTF-8";
+
+	/* 초기화 */
+	html{ background-color: rgb(240, 242, 245); }
+	a{ text-decoration: 0; color: black; }
+	ul, ol{ list-style-type: none; }
+	
+	
+	.form_container label{
+	    display: block;
+	    text-align: left;
+	    padding-bottom: 5px;
+	    font-size: 18px;
+	}
+	
+	input{
+		background-color: aliceblue;
+	    border: 2px solid rgb(0, 0, 0, 0);
+	}
+	
+	input:focus{
+	    outline: none;
+	}
+	
+	.form_container{
+	    width: 600px;
+	    padding-top: 70px;
+	    margin: 100px auto;
+	    background-color: white;
+	    border-radius: 30px;
+	}
+	
+	#pw_change_form {
+		display: block;
+	}
+
+	.head{
+	    width: 100%;
+	}
+		
+	.pw_change_box{
+	    width: 600px;
+	    margin: 0 auto;
+	}
+	
+	/* 비밀번호 : 현재 비밀번호 / 새 비밀번호 / 새 비밀번호 확인 */
+	.input_box{
+	    width: 450px;
+	    height: 80px;
+	    margin: 35px auto 20px; 	
+	}
+	
+	.input_box input{
+	    width: 100%; height: 45px;
+	    border-radius: 10px;
+	}
+	
+	/* 이메일 */
+	.email_box{
+	    width: 450px;
+	    margin: 35px auto;
+	}
+	
+	.email_box input[type=text]{
+	    width: 75%; height: 45px;
+	    border-radius: 10px;
+	    margin-bottom: 5px;
+	}
+	
+	.email_box input[type=button]{
+	    width: 23%; height: 45px;
+	    background-color: pink;
+	    border-radius: 10px;
+	    font-size: 12px;
+	}
+
+	/* input tag 공백 */
+	.space input[type=text] {
+		padding-left:15px;
+	}
+	
+	/* 정규식 메세지 */
+	.error_msg {
+	    font-size:13px;
+	    color:red;
+	}
+	.pass_msg {
+	    font-size:13px;
+	    color:grey;
+	}
+	
+	
+	/* btn */
+	.btn_wrap{
+	    width: 450px;
+	    margin: 35px auto;
+	    padding-bottom: 50px;
+	}
+	.btn_wrap button{
+		color:white;
+	    width: 450px; height: 45px;
+	    background: #fe585c;
+	    border-radius: 10px;
+	    margin-bottom: 40px;
+		border: none; 
+	}
+	
+	/* 포인터 */
+	.pointer:hover {
+		cursor: pointer;
+	}
+	
+	/* 안내메세지 박스 */
+	.msg_box {
+		padding: 5px;
+	} 
+	
+	/* 현재 비밀번호 */
+	#password_check_btn {
+	    width: 102.5px;
+	    height: 45px;
+	    background-color: pink;
+	    border-radius: 10px;
+	    font-size: 12px;
+	    margin-left: 5px;
+	}
+	#pw {
+		width: 337.5px;
+	}
+	#current_pw_box {
+		display: flex;
+		width:220px;
+	}
+
+	
+	/*  footer */
+   .footer_wrap {
+	   padding-bottom: 40px;
+	   text-align: center;
+	   color: #6e6e6e;
+   }
+  .footer_wrap  h2 { margin-top:  40px;}
+	

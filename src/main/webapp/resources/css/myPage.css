@@ -1,0 +1,378 @@
+@charset "UTF-8";
+
+	
+	.notosanskr * { 
+	 font-family: 'Noto Sans KR', sans-serif;
+	}
+	
+	*{
+	    margin: 0; padding: 0;
+	    box-sizing: border-box;
+	 	font-family: 'Noto Sans KR', sans-serif;
+	    font-size: 14px;
+	}
+	/* 초기화 */
+	html{ background-color: rgb(240, 242, 245); }
+	a{ text-decoration: 0; color: black; }
+	ul, ol{ list-style-type: none; }
+	
+	label{
+	    display: block;
+	    text-align: left;
+	    padding-bottom: 5px;
+	    font-size: 14px;
+	}
+	
+	input{
+		background-color: aliceblue;
+	    border: 2px solid rgb(0, 0, 0, 0);
+	}
+	
+	input:focus{
+	    outline: none;
+	}
+	
+	.profile_container{
+	    width: 600px;
+	    height: 850px;
+	    margin: 150px auto 0 auto;
+	    background-color: white;
+	    border-radius: 30px;
+	    padding-bottom: 20px;
+	    z-index: 1;
+	}
+	
+	.head{
+	    width: 100%;
+	}
+	
+	/* 상단 로고 */
+	.title {
+		padding-top: 30px;
+	}
+
+	/* 회원 탈퇴 구역 */
+	.leave_user_wrap {
+		position: relative;
+		margin: 0 auto;
+	}
+	.current_pw_check_box{
+		background-color: white;
+		z-index: -5;
+		width: 500px;
+		height: 300px;
+		position: absolute;
+	    border-radius: 10px;
+		margin-left: 50px;
+		margin-top: 100px;
+	    border: 2px solid lightgray;
+	}
+	.current_pw_check_box label {
+		margin: 20px 300px 0 28px;
+		width: 120px;
+	}
+	
+		/* 현재 비밀번호 */
+	.current_pw_check_box #password_check_btn {
+	    width: 102.5px;
+	    height: 45px;
+	    background-color: #fe585c;
+	    border-radius: 10px;
+	    font-size: 12px;
+	    margin-left: 5px;
+	    color: white;
+	}
+	.current_pw_check_box #pw {
+		width: 337.5px;
+		height: 45px;
+	    border-radius: 10px;
+	    margin-bottom: 5px;
+		background-color: aliceblue;
+		padding-left: 14px;
+	}
+	#current_pw_box {
+		display: flex;
+		width: 440px;
+		margin: 20px auto 0 auto;
+	}
+	
+	/* 탈퇴 박스 띄우는 버튼 */
+	#show_leave_btn_box {
+		float: right;
+		margin: 20px 20px 0 0;
+		background-color: white;
+		font-weight: 400;
+		color: lightgray;
+		font-size: 10px;
+	}
+	#show_leave_btn_box:hover {
+		text-decoration: underline;
+	}
+	/* 찐 탈퇴 버튼 */
+	#leave_btn {
+		color:white;
+	    width: 220px; height: 50px;
+	    background-color: #fe585c;
+	    border-radius: 10px;
+		border: none;
+		margin: 30px 140px 20px 140px;
+	}
+	.close_leave_btn_box{
+		display: none;
+	}
+	#close_leave_btn_area{
+		display: block;
+	}
+	#close_leave_area_icon {
+	    margin-left: 460px;
+	    font-size: 20px;
+	    padding: 5px;
+	    margin-top: 8px;
+	}
+	
+	/* 프로필 사진 */
+	/* profile area */
+	#user_img:hover{
+		visibility: visible;
+	}
+	#profile_area {
+		height: 150px;
+		padding: 50px 0 0 80px;
+		position: relative;
+		display: flex;
+	}
+	#p_img #user_img {
+		width: 100%;
+		height: 100%;
+		border-radius: 100%;
+	}
+	.defaultImg{
+		background-image: url(../image/profile_default.png);
+		background-size: 100px 100px;
+	}
+	
+	.content_box {
+		margin-left: 20px;
+	}
+	#content {
+	    border-radius: 10px;
+	    padding: 10px;
+	    resize: none;
+	    outline: none;
+	    background: aliceblue;
+	    border-style: none;
+	}
+	
+	/* 첨부박스 */
+	.file_box{
+		width:250px;
+		height: 150px;
+		position: absolute;
+		z-index: -1;
+		background-color: white;
+		text-align: center;
+		border-radius: 10px;
+		border: 1px solid rgba(50,50,50,0.3);
+		top: 150px;
+	}
+	#p_img:before{
+		content: attr(data-msg);
+		font-weight: lighter;
+		font-size: 12px;
+		position: absolute;
+		z-index:2;
+		visibility: hidden;
+		background-color: white;
+		border: 0.5px solid lightgray;
+		border-radius: 10px;
+		padding:5px;
+	}
+	#p_img:hover:before{
+		visibility: visible;
+	}
+	.show {
+		z-index: 10;
+	}
+	#file {
+		margin:10px auto 20px;
+		width: 200px;
+		background-color: white;
+		border-radius: 10px;
+		padding: 5px;
+		font-weight: 400;
+	}
+	#file_label{
+		width: 100px;
+		height: 50px;
+		margin: 0 auto 5px auto;
+		cursor: pointer;
+	}
+	#file {
+		display: none;
+	}
+	.fa-photo-video {
+		color: #fe585c;
+		font-size: 40px;
+		padding-left: 25px;
+	}
+	#profile_result {
+		width: 100px;
+		height: 100px;
+		border-radius:  100px;
+	}
+	.p_btn {
+		padding-top: 10px;
+		background-color: white;
+		font-size: 14px;
+	}
+	.p_btn:hover {
+		text-decoration: underline;
+	}
+	
+	/* profile area / file box / btns */
+	.delete_update_form{
+		width: 148px;
+		border-radius: 10px;
+		border : 1px solid rgba(50,50,50,0.3);
+		margin: 0 auto;
+		padding: 3px;
+		text-align: center;
+		background-color: white;
+		display: flex;
+	  }
+	  	#close_file_box_icon_area {
+		display: block;
+		width: 16px;
+	   	margin-left: 220px;
+	}
+	  /* 사진박스 닫기 아이콘 */
+	  #close_file_box_icon {
+		font-size: 16px;
+		margin: 10px 10px 0 0;
+	  }
+	  .delete_update_form li:first-child {
+		border-right: 1px solid rgba(50,50,50,0.3);
+	  }
+	  .delete_update_form li {
+		padding: 5px;
+	  }
+	   .delete_update_form li input {
+	      font-size: 12px;
+	      font-weight: 400;
+	      background-color: white;
+	   }
+	   .delete_update_form li input:hover {   font-weight: bold;  }
+	   
+	   
+	#user_name_area {
+		font-size: 20px;
+		padding-top: 50px;
+		margin-left: 50px;
+	}
+	
+	
+	/* 비밀번호 재확인, 이름 */
+	
+	.input_box{
+	    width: 441px;
+	    margin: 35px auto;
+	}
+	
+	.input_box input{
+	    width: 441px; height: 45px;
+	    border-radius: 10px;
+	  	padding-left: 14px;
+	}
+	
+	/* 번호 */
+	.tel_box{
+	    width: 440px; height: 100%;
+	    margin: 35px auto;
+	
+	}
+	
+	.tel_box > span > input{
+	    width: 440px; height: 45px;
+	    border-radius: 10px;
+	    padding-left: 14px;
+	}
+	
+	/* 생년월일 */
+	.birth_box{
+	    width: 450px;
+	    margin: 35px auto;
+	}
+	
+	.birth_box > select, option{
+	    width: 135px; height: 45px;
+	    margin: 0 5px 0 5px;
+	    text-align: center;
+	    background-color: rgb(232, 240, 254);
+	    border: none;
+	    border-radius: 10px;
+	    font-size: 14px;
+	    cursor: pointer;
+	}
+	
+	
+	/* 성별 */
+	.gender_box{
+	    width: 450px;
+	    margin: 35px auto;
+	}
+	
+	.gender_box > p{
+	    font-size: 14px;
+	    padding-bottom: 5px;
+	}
+	
+	.gender_box > label{
+		font-size: 14px;
+	}
+	
+	.gender_box > input[type=radio]{
+	    width: 0; height: 0;
+	    position: absolute;
+	    left: -9999px;
+	}
+	
+	.gender_box > input[type=radio] + label{
+	    display: inline-block;
+	    position: relative;
+	    justify-content: center;
+	    width: 145px; height: 45px;
+	    line-height: 45px;
+	    border: none;
+	    border-radius: 10px;
+	    background-color: rgb(232, 240, 254);
+	    text-align: center;
+	    cursor: pointer;
+	  }
+	
+	.gender_box > input[type=radio]:checked + label{
+	    background-color: #91c7fa;
+	    color: #FFF;
+	    border: none;
+	    box-shadow: 0 0 10px rgba(102, 179, 251, 0.5);
+	    z-index: 1;
+	  }
+	
+	/* 수정완료 */
+	.btn_wrap{
+	    width: 450px;
+	    margin: 0 auto;
+	}
+
+	.btn_wrap input{
+		color:white;
+	    width: 441px; height: 45px;
+	    background-color: #fe585c;
+	    border-radius: 10px;
+	    margin-top: 40px;
+		border: none; 
+	}
+	
+	/* 포인터 */
+	.pointer:hover {
+		cursor: pointer;
+	}

@@ -1,0 +1,97 @@
+@charset "UTF-8";
+	 .header {
+		
+		height: 106px;
+		background-color: white;
+	}
+    #memberList_btn {
+		
+        border-bottom: 8px solid #fe4662;
+      }
+	#memberList_icon { color: #fe4662; }
+   .profile_menu li {
+        display: block;
+		border: 1px solid black;   
+   }
+   .search_result{
+   		width: 1500px;
+   		margin: 30px auto;
+   		font-size: 20px;
+   		font-weight: 600;
+   		text-align: center;
+   }
+   .search_result_wrap { 
+   		width: 1500px;
+   		margin: 0 auto;
+   }
+   table {	
+   		border-collapse: collapse; 
+   		margin: 0 auto; 
+   		text-align: center;
+   	}
+   table tr td { border: 1px solid black; padding-left: 5px; }
+   table thead tr:nth-child(1) { font-weight: bold; }
+   table thead tr:nth-child(2){ border-bottom: none; } 
+   table tr td:nth-child(1) { width: 80px;   }   
+   table tr td:nth-child(2) { width: 150px;  }
+   table tr td:nth-child(3) { width: 150px;  }
+   table tr td:nth-child(4) { width: 250px;  }
+   table tr td:nth-child(5) { width: 150px;  }
+   table tr td:nth-child(6) { width: 150px;  }
+   table tr td:nth-child(7) { width: 50px;    }
+   table tr td:nth-child(8) { width: 130px;   }
+   table tr td:nth-child(9) { width: 130px;  } 
+   .list_thead td { 
+   		height: 40px; 
+   		border-top: none;
+   		border-left: none;
+   		border-right: none;
+   	    border-bottom: 2px solid gray;
+   	}
+    tbody tr td{ 	
+    	height: 30px;
+   		border-top: none;
+   		border-left: none;
+   		border-right: none;
+     }
+     tfoot tr td {
+     	height: 40px; 
+     	border-left: none;
+   		border-right: none;
+   		border-bottom: none;
+      }
+   .fa-user{   color: #fe4662;   cursor: pointer; }
+	a { color:black; }
+   .member_delete {		color : black; }
+
+   .pageNo:hover{  font-weight: bold; color:black; }
+   .nowPage {	color:red; }
+   
+   /* confirm 관련 */
+  .swal2-popup {
+ 	 width: 330px;
+  	 height: 220px;
+  	 padding: 0.6em;
+	}
+  .swal2-icon.swal2-warning {
+	width: 50px;
+	height: 50px;
+	border-color: pink;
+	color: pink;
+	}
+	 .swal2-content{    font-size: 0.9em;  }
+	 .swal2-icon .swal2-icon-content {
+	    height: 30px; width:20px;
+	 	font-size: 45px;
+	    padding-top: 10px;
+	    padding-left: 4px;
+	 }
+	 .swal2-styled.swal2-confirm {
+	 	width: 90px;
+	 	font-size: 13px;
+	 	background-color: pink;
+	 }
+	.swal2-styled.swal2-cancel {
+		width: 90px;
+		font-size: 13px;
+	}

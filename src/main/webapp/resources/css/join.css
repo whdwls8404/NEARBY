@@ -1,0 +1,301 @@
+@charset "UTF-8";
+/* 기본 레이아웃 */
+*{
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+html{
+    background-color: rgb(240, 242, 245);
+}
+
+a{
+    text-decoration: 0;
+    color: black;
+}
+
+ul, ol{
+    list-style-type: none;
+}
+
+label{
+    display: block;
+    text-align: left;
+    padding-bottom: 5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+input{
+    background-color: rgb(232, 240, 254);
+    cursor: pointer;
+    border: none;
+}
+
+button{
+    cursor: pointer;
+}
+
+input:focus{
+    background-color: #91c7fa;
+    box-shadow: 0 0 10px rgba(102, 179, 251, 0.5);
+}
+
+input[type=text]{
+    padding-left: 15px;
+    font-weight: 300;
+}
+
+.icon {
+    display: inline-block;
+    position: absolute;
+    right: 15px;
+    top: 37px;
+    font-weight: 900;
+}
+
+.container{
+    width: 600px;
+    margin: 50px auto;
+    padding-bottom: 20px;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 10px 10px 20px rgba(30, 30, 30, 0.5);
+}
+
+.head{
+    width: 100%;
+}
+
+/* 상단 로고 */
+.title{
+    padding-top: 1px;
+}
+
+.title > a{
+    display: block;
+    width: 200px; height: 76px;
+    margin: 10px auto;
+    text-align: center;
+    font-size: 0;
+
+    background-image: url(../image/logo_color.png);
+    background-size: 200px 76px;
+    background-repeat: no-repeat;
+}
+
+.join_form{
+    width: 600px;
+    margin: 0 auto;
+}
+
+/* 
+    아이디, 비밀번호, 비밀번호 재확인, 이름
+*/
+.input_box{
+    width: 450px;
+    margin: 35px auto;
+}
+
+.input_box, .email_box, .tel_box{
+	position: relative;
+}
+
+.fa-check{
+	display: none;
+	color: #3348ff;
+    font-size: 18px;
+}
+
+.fa-times{
+	display: none;
+	color: #ff0000;
+	font-size: 18px;
+}
+
+.input_box input{
+    width: 100%; height: 45px;
+    border-radius: 10px;
+}
+
+/* 이메일 */
+.email_box{
+    width: 450px;
+    margin: 35px auto;
+}
+
+.email_box input[type=text]{
+    width: 450px; height: 45px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.email_box > input[type=button]{
+    display: none;
+    width: 23%; height: 45px;
+    background: #fe585c;
+    border-radius: 10px;
+    font-size: 12px;
+    color: white;
+    outline: none;
+}
+
+#authCode_box > input[type=text]{
+    width: 75%; height: 45px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+#authCode_box > input[type=button]{
+    width: 23%; height: 45px;
+    background: #fe585c;
+    border-radius: 10px;
+    font-size: 12px;
+    color: white;
+    outline: none;
+}
+
+#authCode_box{
+    width: 450px;
+    display: none;
+}
+
+/* 번호 */
+.tel_box{
+    width: 450px; height: 100%;
+    margin: 35px auto;
+
+}
+
+.tel_box input{
+    width: 450px; height: 45px;
+    border-radius: 10px;
+}
+
+/* 생년월일 */
+.birth_box{
+    width: 450px;
+    margin: 35px auto;
+}
+
+.birth_box > select, option{
+    width: 135px; height: 45px;
+    margin: 0 5px 0 5px;
+    text-align: center;
+    background-color: rgb(232, 240, 254);
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* 성별 */
+.gender_box{
+    width: 450px;
+    margin: 35px auto;
+}
+
+.gender_box > p{
+    font-size: 14px;
+    padding-bottom: 5px;
+}
+
+.gender_box > label{
+	font-size: 18px;
+}
+
+.gender_box > input[type=radio]{
+    width: 0; height: 0;
+    position: absolute;
+    left: -9999px;
+}
+
+.gender_box > input[type=radio] + label{
+    display: inline-block;
+    position: relative;
+    justify-content: center;
+    width: 145px; height: 45px;
+    line-height: 45px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(232, 240, 254);
+    text-align: center;
+    cursor: pointer;
+  }
+
+.gender_box > input[type=radio]:checked + label{
+    background-color: #91c7fa;
+    color: #FFF;
+    border: none;
+    box-shadow: 0 0 10px rgba(102, 179, 251, 0.5);
+    z-index: 1;
+  }
+
+
+/* 회원가입 버튼 */
+.join_btn_wrap{
+    width: 450px;
+    margin: 60px auto 50px auto;
+}
+
+.join_btn_wrap > button{
+	display: block;
+    width: 450px; height: 50px;
+    margin: 0 auto;
+    background: #fe585c;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 900;
+    color: white;
+}
+
+#pol{
+	color: #c6bcbc;
+	font-weight: 100;
+}
+
+#pol:hover{
+	font-weight: 900;
+}
+
+/* sweet alert */
+/* error icon */
+.swal2-icon.swal2-error {color: pink; border-color: pink;}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    display: block;
+    position: absolute;
+    top: 2.3125em;
+    width: 2.9375em;
+    height: 0.3125em;
+    border-radius: 0.125em;
+    background-color: #ffc0cb;
+}
+
+/* success icon*/
+.swal2-icon.swal2-success [class^=swal2-success-line] {background-color: #2778c4;}
+.swal2-icon.swal2-success .swal2-success-ring{border: 0.25em solid #2778c4;}
+
+/* button */
+.swal2-confirm {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: #ffc1cb;
+    color: #fff;
+    font-size: 1em;
+}
+
+/* 정규식 메세지 */
+.error_msg {
+    display: block;
+    margin: 3px;
+    font-size:12px;
+    color:red;
+}
+.pass_msg {
+	display: block;
+    font-size:12px;
+    color:grey;
+}
